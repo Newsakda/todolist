@@ -9,7 +9,7 @@ export default function Home() {
           <div className="transition-all duration-300 group-hover:animate-wiggle">
             <Image
               src="/logo.png"
-              alt="Todo List Logo1"
+              alt="Todo List Logo"
               width={100}
               height={100}
               priority
