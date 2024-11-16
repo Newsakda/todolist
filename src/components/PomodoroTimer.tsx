@@ -8,7 +8,7 @@ interface PomodoroTimerProps {
 }
 
 export default function PomodoroTimer({ task, onClose }: PomodoroTimerProps) {
-  const [timeLeft, setTimeLeft] = useState(25 * 60); // 25 minutes in seconds
+  const [timeLeft, setTimeLeft] = useState(25 * 60);
   const [isRunning, setIsRunning] = useState(true);
 
   useEffect(() => {
@@ -32,10 +32,10 @@ export default function PomodoroTimer({ task, onClose }: PomodoroTimerProps) {
 
   return (
     <div className="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50">
-      <div className="bg-white dark:bg-gray-800 rounded-lg p-8 w-full max-w-sm relative">
+      <div className="bg-white rounded-lg p-8 w-full max-w-sm relative">
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700 dark:hover:text-gray-300"
+          className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
           aria-label="Close timer"
         >
           <svg className="w-6 h-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -44,10 +44,10 @@ export default function PomodoroTimer({ task, onClose }: PomodoroTimerProps) {
         </button>
         
         <div className="text-center">
-          <h2 className="text-lg font-semibold mb-6 text-gray-800 dark:text-gray-200">
+          <h2 className="text-lg font-semibold mb-6 text-gray-800">
             {task}
           </h2>
-          <div className="font-mono text-7xl font-bold mb-8 text-gray-900 dark:text-gray-100 tracking-wider">
+          <div className="font-mono text-7xl font-bold mb-8 text-gray-900 tracking-wider">
             {String(minutes).padStart(2, '0')}:{String(seconds).padStart(2, '0')}
           </div>
           <button
