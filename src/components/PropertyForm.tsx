@@ -26,7 +26,7 @@ export default function PropertyForm() {
     // จำลองการเรียก API (สามารถแทนที่ด้วยการเรียก API จริงในภายหลัง)
     setTimeout(() => {
       const demoHeadlines = [
-        { id: 1, text: '🏠 บ้านสวยพร้อมสระ ใกล้ MRT พระราม 9 เพียง 5.9 ล้าน คุ้มค่าน่าลงทุน!' },
+        { id: 1, text: '🏠 บ้านสวยพร้อมสระ ใกล้ MRT พระราม 9 เพียง 5.9 ล้าน คุ้มค่าน่า���งทุน!' },
         { id: 2, text: '⭐ โอกาสทองมาถึงแล้ว! บ้านเดี่ยว 2 ชั้น ทำเลทอง ใกล้ Central Rama 9' },
         { id: 3, text: '💎 Luxury Home ใจกลางพระราม 9 พร้อมสระว่ายน้ำส่วนตัว ราคาเริ่มต้น 5.9 ล้าน' },
         { id: 4, text: '🌟 ห้ามพลาด! บ้านหรูย่านธุรกิจ ครบครันทุกฟังก์ชัน ราคาจับต้องได้' },
@@ -39,7 +39,6 @@ export default function PropertyForm() {
 
   return (
     <div className="w-full space-y-6">
-      {/* ส่วนฟอร์มเดิม */}
       <div className="space-y-2">
         <label className="block text-sm font-medium text-gray-700">
           1. ใส่รายละเอียดอสังหาฯ
@@ -48,7 +47,7 @@ export default function PropertyForm() {
           value={propertyDetails}
           onChange={(e) => setPropertyDetails(e.target.value)}
           placeholder="Preview: บ้านเดี่ยว 2 ชั้น 3 ห้องนอน 2 ห้องน้ำ พื้นที่ใช้สอย 150 ตร.ม. พร้อมสระว่ายน้ำส่วนตัว เฟอร์นิเจอร์ครบ ราคา 5.9 ล้านบาท"
-          className="w-full p-3 border rounded-lg min-h-[100px] focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full p-3 border rounded-lg min-h-[100px] focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-400"
         />
       </div>
 
@@ -60,7 +59,7 @@ export default function PropertyForm() {
           value={propertyLocation}
           onChange={(e) => setPropertyLocation(e.target.value)}
           placeholder="Preview: ถนนพระราม 9 ใกล้ MRT พระราม 9 เพียง 300 เมตร ใกล้ Central Rama 9, Fortune Town, The Nine"
-          className="w-full p-3 border rounded-lg min-h-[100px] focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+          className="w-full p-3 border rounded-lg min-h-[100px] focus:ring-2 focus:ring-blue-500 focus:border-blue-500 text-black placeholder-gray-400"
         />
       </div>
 
