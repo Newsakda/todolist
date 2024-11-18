@@ -2,12 +2,10 @@
 
 import { useState } from 'react';
 import { TodoItem } from '@/types';
-import PomodoroTimer from './PomodoroTimer';
 
 export default function TodoList() {
   const [todos, setTodos] = useState<TodoItem[]>([]);
   const [newTodo, setNewTodo] = useState('');
-  const [activePomodoro, setActivePomodoro] = useState<string | null>(null);
 
   const handleAddTodo = () => {
     if (newTodo.trim()) {
@@ -26,10 +24,6 @@ export default function TodoList() {
       if (a.completed === b.completed) return 0;
       return a.completed ? 1 : -1;
     }));
-  };
-
-  const startPomodoro = (text: string) => {
-    setActivePomodoro(text);
   };
 
   return (
@@ -70,27 +64,9 @@ export default function TodoList() {
             <span className={todo.completed ? 'line-through text-gray-500' : ''}>
               {todo.text}
             </span>
-            {!todo.completed && (
-              <button
-                onClick={() => startPomodoro(todo.text)}
-                className="ml-auto p-2 text-green-600 hover:text-green-700 dark:text-green-500 dark:hover:text-green-400"
-                aria-label="Start Pomodoro timer"
-              >
-                <svg className="w-5 h-5" viewBox="0 0 24 24" fill="currentColor">
-                  <path d="M8 5v14l11-7z"/>
-                </svg>
-              </button>
-            )}
           </li>
         ))}
       </ul>
-
-      {activePomodoro && (
-        <PomodoroTimer
-          task={activePomodoro}
-          onClose={() => setActivePomodoro(null)}
-        />
-      )}
     </div>
   );
 } 

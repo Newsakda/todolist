@@ -5,18 +5,16 @@ export default function Home() {
   return (
     <div className="min-h-screen flex flex-col items-center p-8">
       <main className="w-full max-w-2xl flex flex-col items-center gap-6">
-        <div className="animate-float group">
-          <div className="transition-all duration-300 group-hover:animate-wiggle">
-            <Image
-              src="/logo.png"
-              alt="Todo List Logo"
-              width={100}
-              height={100}
-              priority
-            />
-          </div>
+        <div className="animate-bounce">
+          <Image
+            src="/logo.svg"
+            alt="Todo List Logo"
+            width={100}
+            height={100}
+            priority
+          />
         </div>
-        <h1 className="text-3xl font-bold">New To do</h1>
+        <h1 className="text-3xl font-bold">To-Do-List</h1>
         <TodoList />
       </main>
     </div>
