@@ -3,7 +3,7 @@ import TodoList from "@/components/TodoList";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center p-8">
+    <div className="min-h-screen flex flex-col items-center p-8 bg-white">
       <main className="w-full max-w-2xl flex flex-col items-center gap-6">
         <div className="animate-bounce">
           <Image
