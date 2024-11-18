@@ -3,7 +3,7 @@ import TodoList from "@/components/TodoList";
 
 export default function Home() {
   return (
-    <div className="min-h-screen flex flex-col items-center p-8 bg-white">
+    <div className="min-h-screen flex flex-col items-center p-8 bg-white text-black">
       <main className="w-full max-w-2xl flex flex-col items-center gap-6">
         <div className="animate-bounce">
           <Image
@@ -15,8 +15,8 @@ export default function Home() {
           />
         </div>
         <div className="text-center">
-          <h1 className="text-3xl font-bold mb-2">AI ช่วยคิดคำพาดหัวขายบ้านเงินล้าน</h1>
-          <p className="text-gray-600">พัฒนาโปรแกรมโดยอาจารย์นิว</p>
+          <h1 className="text-3xl font-bold mb-2 text-black">AI ช่วยคิดคำพาดหัวขายบ้านเงินล้าน</h1>
+          <p className="text-black">พัฒนาโปรแกรมโดยอาจารย์นิว</p>
         </div>
         <TodoList />
       </main>
