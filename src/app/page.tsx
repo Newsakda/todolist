@@ -14,7 +14,10 @@ export default function Home() {
             priority
           />
         </div>
-        <h1 className="text-3xl font-bold">To-Do-List</h1>
+        <div className="text-center">
+          <h1 className="text-3xl font-bold mb-2">AI ช่วยคิดคำพาดหัวขายบ้านเงินล้าน</h1>
+          <p className="text-gray-600">พัฒนาโปรแกรมโดยอาจารย์นิว</p>
+        </div>
         <TodoList />
       </main>
     </div>
