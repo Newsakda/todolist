@@ -60,7 +60,8 @@ export default function PropertyForm() {
 
   const handleCopy = async (text: string, id: number) => {
     try {
-      await navigator.clipboard.writeText(text);
+      const cleanText = text.replace(/^\d+\.\s*/, '');
+      await navigator.clipboard.writeText(cleanText);
       setCopiedId(id);
       // Reset copied status after 2 seconds
       setTimeout(() => {
