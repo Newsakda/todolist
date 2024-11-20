@@ -1,5 +1,6 @@
 'use client';
 import { useState, useRef } from 'react';
+import { generateHeadlines } from '@/services/difyApi';
 
 interface Headline {
   id: number;
@@ -13,6 +14,8 @@ export default function PropertyForm() {
   const [headlines, setHeadlines] = useState<Headline[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const resultRef = useRef<HTMLDivElement>(null);
+  const [error, setError] = useState<string | null>(null);
+  const [copiedId, setCopiedId] = useState<number | null>(null);
 
   const toneOptions = [
     'ผลประโยชน์',
@@ -22,23 +25,51 @@ export default function PropertyForm() {
     'ชวนสงสัย'
   ];
 
-  const generateHeadlines = () => {
-    setIsLoading(true);
-    setTimeout(() => {
-      const demoHeadlines = [
-        { id: 1, text: '🏠 บ้านสวยพร้อมสระ ใกล้ MRT พระราม 9 เพียง 5.9 ล้าน คุ้มค่าน่างทุน!' },
-        { id: 2, text: '⭐ โอกาสทองมาถึงแล้ว! บ้านเดี่ยว 2 ชั้น ทำเลทอง ใกล้ Central Rama 9' },
-        { id: 3, text: '💎 Luxury Home ใจกลางพระราม 9 พร้อมสระว่ายน้ำส่วนตัว ราคาเริ่มต้น 5.9 ล้าน' },
-        { id: 4, text: '🌟 ห้ามพลาด! บ้านหรูย่านธุรกิจ ครบครันทุกฟังก์ชัน ราคาจับต้องได้' },
-        { id: 5, text: '✨ ดีที่สุดในพระราม 9! บ้านสไตล์โมเดิร์น พร้อมอยู่ ใกล้ทุกความสะดวก' }
-      ];
-      setHeadlines(demoHeadlines);
-      setIsLoading(false);
+  const generateHeadlinesFromDify = async () => {
+    try {
+      setIsLoading(true);
+      setError(null);
+      const response = await generateHeadlines(
+        propertyDetails,
+        propertyLocation,
+        selectedTone
+      );
       
+      // Split the response into separate headlines and format them
+      const generatedHeadlines = response
+        .split('\n')
+        .filter((line: string) => line.trim())
+        .map((text: string, index: number) => ({
+          id: Date.now() + index,
+          text: text.trim()
+        }));
+
+      setHeadlines(generatedHeadlines);
+      
+      // Scroll to results
       setTimeout(() => {
         resultRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
       }, 100);
-    }, 1500);
+    } catch (error) {
+      console.error('Error generating headlines:', error);
+      setError(error instanceof Error ? error.message : 'เกิดข้อผิดพลาดในการสร้างคำพาดหัว');
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
+  const handleCopy = async (text: string, id: number) => {
+    try {
+      await navigator.clipboard.writeText(text);
+      setCopiedId(id);
+      // Reset copied status after 2 seconds
+      setTimeout(() => {
+        setCopiedId(null);
+      }, 2000);
+    } catch (err) {
+      console.error('Failed to copy text:', err);
+      setError('ไม่สามารถคัดลอกข้อความได้');
+    }
   };
 
   return (
@@ -84,9 +115,15 @@ export default function PropertyForm() {
         </select>
       </div>
 
+      {error && (
+        <div className="p-4 bg-red-50 border border-red-200 rounded-lg">
+          <p className="text-red-600">{error}</p>
+        </div>
+      )}
+
       <button
-        onClick={generateHeadlines}
-        disabled={isLoading}
+        onClick={generateHeadlinesFromDify}
+        disabled={isLoading || !propertyDetails || !propertyLocation}
         className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-4 rounded-lg font-medium hover:opacity-90 transition-opacity disabled:opacity-50 text-lg"
       >
         {isLoading ? 'กำลังสร้างคำพาดหัว...' : 'สร้างคำพาดหัว'}
@@ -103,10 +140,29 @@ export default function PropertyForm() {
               >
                 <p className="text-gray-800 text-lg">{headline.text}</p>
                 <button 
-                  className="mt-3 text-base text-blue-500 hover:text-blue-600 transition-colors"
-                  onClick={() => navigator.clipboard.writeText(headline.text)}
+                  className={`mt-3 text-base transition-colors flex items-center gap-2
+                    ${copiedId === headline.id 
+                      ? 'text-green-500 hover:text-green-600' 
+                      : 'text-blue-500 hover:text-blue-600'
+                    }`}
+                  onClick={() => handleCopy(headline.text, headline.id)}
                 >
-                  คลิกเพื่อคัดลอก
+                  {copiedId === headline.id ? (
+                    <>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                      </svg>
+                      คัดลอกแล้ว
+                    </>
+                  ) : (
+                    <>
+                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                      </svg>
+                      คลิกเพื่อคัดลอก
+                    </>
+                  )}
                 </button>
               </div>
             ))}
