@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useUser } from '@clerk/nextjs';
 
 interface Todo {
   id: number;
@@ -9,8 +10,19 @@ interface Todo {
 }
 
 export default function TodoList() {
+  const { isSignedIn } = useUser();
   const [todos, setTodos] = useState<Todo[]>([]);
   const [inputValue, setInputValue] = useState('');
+
+  if (!isSignedIn) {
+    return (
+      <div className="text-center py-10">
+        <h2 className="text-xl font-semibold text-gray-700">
+          Please sign in to use the Todo List
+        </h2>
+      </div>
+    );
+  }
 
   const handleAddTodo = () => {
     if (inputValue.trim()) {

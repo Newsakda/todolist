@@ -1,3 +1,5 @@
+import { ClerkProvider } from '@clerk/nextjs';
+import Header from '@/components/Header';
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
@@ -14,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "New To do",
-  description: "A simple todo list application",
+  title: "Todo App",
+  description: "A simple todo list application with authentication",
 };
 
 export default function RootLayout({
@@ -25,11 +27,14 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
-        {children}
-      </body>
+      <ClerkProvider>
+        <body
+          className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        >
+          <Header />
+          {children}
+        </body>
+      </ClerkProvider>
     </html>
   );
 }
