@@ -18,7 +18,7 @@ export default function Header() {
             height={40}
             className="w-10 h-10"
           />
-          <span className="font-semibold text-xl">Todo App</span>
+          <span className="font-semibold text-xl">AI สำหรับอสังหาฯ โดยอาจารย์นิว</span>
         </div>
 
         {/* Auth Buttons */}

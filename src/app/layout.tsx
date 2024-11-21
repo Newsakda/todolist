@@ -16,8 +16,8 @@ const geistMono = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Todo App",
-  description: "A simple todo list application with authentication",
+  title: "AI สำหรับอสังหาฯ โดยอาจารย์นิว",
+  description: "AI ช่วยคิดคำพาดหัวขายบ้านเงินล้าน พัฒนาโดยอาจารย์นิว",
 };
 
 export default function RootLayout({
