@@ -134,13 +134,20 @@ export default function PropertyForm() {
       {headlines.length > 0 && (
         <div ref={resultRef} className="space-y-4">
           <div className="flex justify-center">
-            <Image
-              src="/course.png"
-              alt="Course Banner"
-              width={600}
-              height={338}
-              className="rounded-lg shadow-md"
-            />
+            <a 
+              href="https://offer.ajannew.com/5-days-facebook-ads"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="cursor-pointer hover:opacity-90 transition-opacity"
+            >
+              <Image
+                src="/course.png"
+                alt="Course Banner"
+                width={600}
+                height={338}
+                className="rounded-lg shadow-md"
+              />
+            </a>
           </div>
 
           <div className="bg-gray-50 p-6 rounded-lg">
