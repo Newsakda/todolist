@@ -1,6 +1,7 @@
 'use client';
 import { useState, useRef } from 'react';
 import { generateHeadlines } from '@/services/difyApi';
+import Image from 'next/image';
 
 interface Headline {
   id: number;
@@ -131,42 +132,54 @@ export default function PropertyForm() {
       </button>
 
       {headlines.length > 0 && (
-        <div ref={resultRef} className="space-y-4 bg-gray-50 p-6 rounded-lg">
-          <h2 className="text-2xl font-semibold text-gray-800">ผลลัพธ์คำพาดหัว</h2>
-          <div className="space-y-4">
-            {headlines.map((headline) => (
-              <div
-                key={headline.id}
-                className="p-5 bg-white rounded-lg border hover:shadow-md transition-shadow"
-              >
-                <p className="text-gray-800 text-lg">{headline.text}</p>
-                <button 
-                  className={`mt-3 text-base transition-colors flex items-center gap-2
-                    ${copiedId === headline.id 
-                      ? 'text-green-500 hover:text-green-600' 
-                      : 'text-blue-500 hover:text-blue-600'
-                    }`}
-                  onClick={() => handleCopy(headline.text, headline.id)}
+        <div ref={resultRef} className="space-y-4">
+          <div className="flex justify-center">
+            <Image
+              src="/course.png"
+              alt="Course Banner"
+              width={600}
+              height={338}
+              className="rounded-lg shadow-md"
+            />
+          </div>
+
+          <div className="bg-gray-50 p-6 rounded-lg">
+            <h2 className="text-2xl font-semibold text-gray-800">ผลลัพธ์คำพาดหัว</h2>
+            <div className="space-y-4">
+              {headlines.map((headline) => (
+                <div
+                  key={headline.id}
+                  className="p-5 bg-white rounded-lg border hover:shadow-md transition-shadow"
                 >
-                  {copiedId === headline.id ? (
-                    <>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
-                      </svg>
-                      คัดลอกแล้ว
-                    </>
-                  ) : (
-                    <>
-                      <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
-                        <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
-                        <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
-                      </svg>
-                      คลิกเพื่อคัดลอก
-                    </>
-                  )}
-                </button>
-              </div>
-            ))}
+                  <p className="text-gray-800 text-lg">{headline.text}</p>
+                  <button 
+                    className={`mt-3 text-base transition-colors flex items-center gap-2
+                      ${copiedId === headline.id 
+                        ? 'text-green-500 hover:text-green-600' 
+                        : 'text-blue-500 hover:text-blue-600'
+                      }`}
+                    onClick={() => handleCopy(headline.text, headline.id)}
+                  >
+                    {copiedId === headline.id ? (
+                      <>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path fillRule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clipRule="evenodd" />
+                        </svg>
+                        คัดลอกแล้ว
+                      </>
+                    ) : (
+                      <>
+                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M8 3a1 1 0 011-1h2a1 1 0 110 2H9a1 1 0 01-1-1z" />
+                          <path d="M6 3a2 2 0 00-2 2v11a2 2 0 002 2h8a2 2 0 002-2V5a2 2 0 00-2-2 3 3 0 01-3 3H9a3 3 0 01-3-3z" />
+                        </svg>
+                        คลิกเพื่อคัดลอก
+                      </>
+                    )}
+                  </button>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       )}
