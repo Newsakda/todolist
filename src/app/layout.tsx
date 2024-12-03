@@ -60,6 +60,16 @@ export default function RootLayout({
         <body
           className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         >
+          <div className="bg-red-600 text-white text-center py-2">
+            <a 
+              href="https://www.ai-for-property.com/" 
+              target="_blank" 
+              rel="noopener noreferrer"
+              className="hover:underline"
+            >
+              หากหาปุ่ม Login ไม่เจอ คลิกที่นี่
+            </a>
+          </div>
           <Header />
           {children}
         </body>
