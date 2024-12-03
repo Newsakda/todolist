@@ -19,7 +19,7 @@ export default function LandingPage() {
       <div className="container mx-auto px-4 py-16">
         <div className="max-w-4xl mx-auto text-center space-y-8">
           <h1 className="text-5xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            AI. ช่วยคิดคำพาดหัวขายบ้านเงินล้าน
+            AI ช่วยคิดคำพาดหัวขายบ้านเงินล้าน
           </h1>
           
           <p className="text-xl text-gray-600 max-w-2xl mx-auto">
